@@ -1,15 +1,19 @@
 const btns = document.querySelectorAll('.button');
 
-// Function to handle the click event
-function handleClick(event) {
-    // Do something when the button is clicked
-    console.log(event.target.textContent);
-}
+let result = "";
+let num1 = 0;
+let num2 = 0;
 
-// Add event listener to each button
+
 btns.forEach(button => {
     button.addEventListener('click', handleClick);
 });
+function handleClick(event) {
+    let buttonValue = event.target.value;
+    buttonValue = num1;
+    console.log('Button clicked:', num1);
+    
+}
 
 function operate(a, b, operator){
     if (operator === "+"){
