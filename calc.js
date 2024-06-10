@@ -3,11 +3,13 @@ const equals = document.getElementById("equals");
 const clear = document.getElementById("clear");
 const calcScreen = document.getElementById("calcScreen");
 const calcOpera = document.getElementById("calcOpera");
+let decimalClicked = false;
 
 let num1 = [];
 let num2 = [];
 let operator = null;
 let result = 0;
+let finalResult = 0;
 
 btns.forEach(button => {
     button.addEventListener('click', handleClick);
@@ -17,53 +19,74 @@ btns.forEach(button => {
 function handleClick(event) {
     let buttonValue = event.target.value;
    
-    if (!isNaN(buttonValue)) {
-        if (operator === null) {
-            num1 = parseInt(num1.toString() + buttonValue);
+    if (!isNaN(buttonValue) || buttonValue === ".") {
+        if (buttonValue === '.' && decimalClicked) {
+            return;
         }
-        else{
-            num2 = parseInt(num2.toString() + buttonValue);
+    
+        if (operator === null) {
+            num1 += buttonValue;
+            if (buttonValue === '.') {
+                decimalClicked = true;
+            }
+        } 
+
+        else {
+            num2 += buttonValue;
+            if (buttonValue === '.') {
+                decimalClicked = true;
+            }
         }
     }
+    
     // If the clicked button is an operator
     else {
-        if (buttonValue === '+' || buttonValue === '-' || buttonValue === '*' || buttonValue === '%') 
+        if (buttonValue === '+' || buttonValue === '-' || buttonValue === '*' || buttonValue === '/') 
         {
             operator = buttonValue;
-            console.log('Operator:', operator);
+            decimalClicked = false;
         }
 
     }
     calcScreen.textContent = buttonValue;
-    calcOpera.textContent = num1 + "" + operator+ "" + num2;
+    calcOpera.textContent = num1 + (operator !== null ? " " + operator + " " + num2 : "") ;
+
 }
 
-equals.addEventListener("click", function () {
-        if (operator === "+"){
-            result += (num1 + num2);
-            console.log(result);
-        }
-        else if (operator === '-') {
-            result += num1 - num2;
-            console.log(result);
-        }
-        else if (operator === '*') {
-            result += num1 * num2;
-            console.log(result);
-        }
-        else if (operator === '/') {
-            result += num1 / num2;
-            console.log(result);
-        }
-    calcScreen.textContent = result;
-
-    });
-
-    //CLEAR BUTTON
-    clear.addEventListener("click", function () {
+//CLEAR BUTTON
+clear.addEventListener("click", function () {
     calcScreen.textContent = "";
+    calcOpera.textContent = null;
     num1 = "";
     num2 = "";
     operator = null;
     result = 0;
+    finalResult = 0;
+    decimalClicked = false;
+    });
+
+
+equals.addEventListener("click", function () {
+        if (operator === "+"){
+            result = parseFloat(num1) + parseFloat(num2);
+        }
+        else if (operator === '-') {
+            result = num1 - num2;
+        }
+        else if (operator === '*') {
+            result = num1 * num2;
+        }
+        else if (operator === '/'){
+            if (parseFloat(num2) === 0){
+            result = 'No No Pilit';
+            }
+            
+            else{
+                result = parseFloat(num1) / parseFloat(num2);
+        
+            }
+        }
+    finalResult = result.toFixed(2);
+    calcScreen.textContent = finalResult;
+
     });
