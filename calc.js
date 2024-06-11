@@ -3,6 +3,9 @@ const equals = document.getElementById("equals");
 const clear = document.getElementById("clear");
 const calcScreen = document.getElementById("calcScreen");
 const calcOpera = document.getElementById("calcOpera");
+const backspaceBtn = document.getElementById("del");
+const negastar = document.getElementById("negats");
+const percentage = document.getElementById("percent");
 let decimalClicked = false;
 
 let num1 = [];
@@ -16,6 +19,7 @@ btns.forEach(button => {
 });
 
 
+
 function handleClick(event) {
     let buttonValue = event.target.value;
    
@@ -23,7 +27,7 @@ function handleClick(event) {
         if (buttonValue === '.' && decimalClicked) {
             return;
         }
-    
+        
         if (operator === null) {
             num1 += buttonValue;
             if (buttonValue === '.') {
@@ -51,6 +55,41 @@ function handleClick(event) {
     calcScreen.textContent = buttonValue;
     calcOpera.textContent = num1 + (operator !== null ? " " + operator + " " + num2 : "") ;
 
+}
+
+//TURN NUMBER INTO NEGATIVE
+percentage.addEventListener("click", porsyento);
+function porsyento() {
+    if (operator === null) {
+        num1 = parseFloat(num1 / 100).toFixed(2) ;
+        calcScreen.textContent = num1;
+    } else {
+        num2 = parseFloat(num2 / 100).toFixed(2) ;
+        calcScreen.textContent = num1 + " " + operator + " " + num2;
+    }
+}
+
+//TURN NUMBER INTO NEGATIVE
+negastar.addEventListener("click", negatification);
+function negatification() {
+    if (operator === null) {
+        num1 = (num1 * -1);
+        calcScreen.textContent = num1;
+    } else {
+        num2 = (num2 * -1);
+        calcScreen.textContent = num1 + " " + operator + " " + num2;
+    }
+}
+
+backspaceBtn.addEventListener("click", blankSpace);
+function blankSpace() {
+    if (operator === null) {
+        num1 = num1.slice(0, -1); // Remove the last character from num1
+        calcScreen.textContent = num1;
+    } else {
+        num2 = num2.slice(0, -1); // Remove the last character from num2
+        calcScreen.textContent = num1 + " " + operator + " " + num2;
+    }
 }
 
 //CLEAR BUTTON
