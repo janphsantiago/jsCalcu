@@ -5,41 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calcu</title>
     <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto">
+
 </head>
 <body>
-    <div class="container">
+    <div class="calcContainer">
         <div id="calcScreen"></div>
         <div id="calcOpera"></div>
-        <div class="first">
-            <button id="clear" value="C">C</button>
-            <button id="percent" value="%">%</button>
-            <button class="button" value="/">/</button>
+
+        <div class="container">
+        <div class="row first">
+            <button class="btn-operator" id="clear" value="C">C</button>
+            <button class="btn-operator" id="percent" value="%">%</button>
+            <button class="btn-operator" value="/">/</button>
             <button id="del" value="del">Back</button>
-            
         </div>
-        <div class="second">
+        <div class="row second">
             <button class="button" name="7" value="7">7</button>
             <button class="button" value= 8>8</button>
             <button class="button" value= 9>9</button>
-            <button class="button" value="*">X</button>
+            <button class="btn-operator" value="*">X</button>
         </div>
-        <div class="third">
+        <div class="row third">
             <button class="button" value= 4>4</button>
             <button class="button" value= 5>5</button>
             <button class="button" value= 6>6</button>
-            <button class="button" value="-" >-</button>
+            <button class="btn-operator" value="-" >-</button>
         </div>
-        <div class="fourth">
+        <div class="row fourth">
             <button class="button" value= 1>1</button>
             <button class="button" value= 2>2</button>
             <button class="button" value= 3>3</button>
-            <button class="button" value= "+" >+</button>
+            <button class="btn-operator" value= "+" >+</button>
         </div>
-        <div class="fifth">
-            <button id="negats" value="nega">+/-</button>
+        <div class="row fifth">
+            <button class="btn-operator" id="negats" value="nega">+/-</button>
             <button class="button" value= 0>0</button>
-            <button class="button" value=".">.</button>
-            <button id="equals">=</button>
+            <button class="btn-operator" value=".">.</button>
+            <button class="btn-operator" id="equals">=</button>
+        </div>
         </div>
     </div>
 

@@ -1,4 +1,4 @@
-const btns = document.querySelectorAll('.button');
+const btns = document.querySelectorAll('button');
 const equals = document.getElementById("equals");
 const clear = document.getElementById("clear");
 const calcScreen = document.getElementById("calcScreen");
@@ -12,7 +12,6 @@ let num1 = [];
 let num2 = [];
 let operator = null;
 let result = 0;
-let finalResult = 0;
 
 btns.forEach(button => {
     button.addEventListener('click', handleClick);
@@ -100,7 +99,6 @@ clear.addEventListener("click", function () {
     num2 = "";
     operator = null;
     result = 0;
-    finalResult = 0;
     decimalClicked = false;
     });
 
@@ -119,13 +117,15 @@ equals.addEventListener("click", function () {
             if (parseFloat(num2) === 0){
             result = 'No No Pilit';
             }
-            
             else{
                 result = parseFloat(num1) / parseFloat(num2);
-        
+                
             }
         }
-    finalResult = result.toFixed(2);
-    calcScreen.textContent = finalResult;
+    
+    if (typeof result === 'number') {
+        result = result.toFixed(2);
+    }
+    calcScreen.textContent = result;
 
     });
